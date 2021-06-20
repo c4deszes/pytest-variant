@@ -5,8 +5,12 @@ jobs:
   unittest:
     name: Unit test
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['2.7', '3.0', '3.6', '3.9', '3.10.0b1']
     container:
-      image: "python"
+      image: python:${{ matrix.python-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,8 +29,12 @@ jobs:
   inttest:
     name: Integration test
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['2.7', '3.0', '3.6', '3.9', '3.10.0b1']
     container:
-      image: "python"
+      image: python:${{ matrix.python-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
