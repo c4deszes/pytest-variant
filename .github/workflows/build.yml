@@ -1,0 +1,60 @@
+name: Build
+on: [pull_request]
+
+jobs:
+  unittest:
+    name: Unit test
+    runs-on: ubuntu-latest
+    container:
+      image: "python"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
+
+      - name: Install package
+        run: python install -e .
+
+      - name: Test using Pytest
+        run: pytest -m unit --cov=pytest_variant
+
+  inttest:
+    name: Integration test
+    runs-on: ubuntu-latest
+    container:
+      image: "python"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
+
+      - name: Install package
+        run: pip intall -e .
+
+      - name: Test using Pytest
+        run: pytest -m integration --cov=pytest_variant
+
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: "python"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+
+      - name: Lint using Pylint
+        run: |
+          pylint pytest_variant tests --fail-under=9.5

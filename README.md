@@ -1,6 +1,5 @@
 # Pytest Variant
 
-[![Workflow](https://github.com/c4deszes/pytest-variant/workflows/Build/badge.svg?branch=master)](https://github.com/c4deszes/ldfparser/actions)
 [![PyPI version](https://badge.fury.io/py/pytest-variant.svg)](https://pypi.org/project/pytest-variant/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytest-variant.svg)](https://pypi.org/project/pytest-variant/)
 ![GitHub last commit](https://img.shields.io/github/last-commit/c4deszes/pytest-variant)
