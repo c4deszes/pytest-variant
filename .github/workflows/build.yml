@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['2.7', '3.0', '3.6', '3.9', '3.10.0b1']
+        python-version: ['3.6', '3.9', '3.10.0b1']
     container:
       image: python:${{ matrix.python-version }}
     steps:
@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['2.7', '3.0', '3.6', '3.9', '3.10.0b1']
+        python-version: ['3.6', '3.9', '3.10.0b1']
     container:
       image: python:${{ matrix.python-version }}
     steps:
