@@ -20,6 +20,8 @@ def variant(request):
     """
     Returns the currently active variant settings
     """
+    if not getattr(request.config, 'variant', None):
+        return {}
     return request.config.variant
 
 def pytest_addoption(parser):
@@ -63,7 +65,11 @@ def pytest_collection_modifyitems(session, config, items):
     for item in items.copy():
         variant_marker = item.get_closest_marker('variant')
 
-        if variant_marker and not variant_marker_eval(config.variant, item, variant_marker):
+        if variant_marker and config.variant is None:
+            warnings.warn(f"Variant source is missing, '{item.nodeid}' will be deselected.")
+            deselected.append(item)
+            items.remove(item)
+        elif variant_marker and not variant_marker_eval(config.variant, item, variant_marker):
             deselected.append(item)
             items.remove(item)
 
