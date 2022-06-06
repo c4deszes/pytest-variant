@@ -6,6 +6,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 > pytest-variant is a plugin for pytest that allows handling variants in test cases.
+> The plugin can deselect test cases that are only meant for certain variants or pass down the
+> variant settings to test cases.
 
 ## Installation
 
