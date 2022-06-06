@@ -65,7 +65,7 @@ def pytest_collection_modifyitems(session, config, items):
     for item in items.copy():
         variant_marker = item.get_closest_marker('variant')
 
-        if variant_marker and config.variant is None:
+        if variant_marker and not getattr(config, 'variant', None):
             warnings.warn(f"Variant source is missing, '{item.nodeid}' will be deselected.")
             deselected.append(item)
             items.remove(item)
