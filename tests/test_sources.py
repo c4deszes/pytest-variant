@@ -19,6 +19,33 @@ def test_sources_configure_none(testdir):
     result.assert_outcomes(passed=1, failed=0)
 
 @pytest.mark.integration
+def test_sources_configure_none_variant_fixture_used(testdir):
+    testdir.makepyfile(
+        """
+        import pytest
+
+        def test_something(variant):
+            assert len(variant) == 0
+        """
+    )
+    result = testdir.runpytest_subprocess()
+    result.assert_outcomes(passed=1, failed=0)
+
+@pytest.mark.integration
+def test_sources_configure_none_variant_marker(testdir):
+    testdir.makepyfile(
+        """
+        import pytest
+
+        @pytest.mark.variant({'os': 'x86'})
+        def test_something():
+            pass
+        """
+    )
+    result = testdir.runpytest_subprocess()
+    result.assert_outcomes(passed=0, failed=0)
+
+@pytest.mark.integration
 def test_sources_configure_hook(testdir):
     testdir.makeconftest(
         """
